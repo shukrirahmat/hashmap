@@ -15,6 +15,11 @@ const hashMap = function hashMap() {
   };
 
   const set = function set(key, value) {
+
+    if ((length() / capacity) > 0.75) {
+      growBucket();
+    }
+
     const index = hash(key) % buckets.length;
     isIndexInRange(index);
 
@@ -123,6 +128,17 @@ const hashMap = function hashMap() {
     }
   };
 
+  const growBucket = function growBucket() {
+    let entriesCopy = entries();
+    capacity = capacity * 2;
+    clear();
+    entriesCopy.forEach((entry) => {
+      set(entry[0], entry[1]);
+    })
+  };
+
+  const view = () => buckets.map((bucket) => bucket.getHead());
+
   return {
     hash,
     set,
@@ -134,6 +150,7 @@ const hashMap = function hashMap() {
     keys,
     values,
     entries,
+    view
   };
 };
 
