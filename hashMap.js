@@ -22,9 +22,9 @@ const hashMap = function hashMap() {
     }
 
     const linkedList = buckets[index];
+    const listIndex = linkedList.find(key);
 
-    if (linkedList.getHead() && linkedList.contains(key)) {
-      const listIndex = linkedList.find(key);
+    if (listIndex !== null) {
       linkedList.at(listIndex).value = value;
     } else {
       linkedList.append(key);
@@ -32,7 +32,6 @@ const hashMap = function hashMap() {
     }
   };
 
-  /*
   const get = function get(key) {
     const index = hash(key) % buckets.length;
 
@@ -40,19 +39,22 @@ const hashMap = function hashMap() {
       throw new Error("Trying to access index out of bound");
     }
 
-    if (buckets[index]) {
+    const linkedList = buckets[index];
+    const listIndex = linkedList.find(key);
 
+    if (listIndex !== null) {
+      return linkedList.at(listIndex).value;
     }
 
     return null;
-  }
-  */
+  };
 
   const view = () => buckets.map((list) => list.getHead());
 
   return {
     hash,
     set,
+    get,
     view,
   };
 };
