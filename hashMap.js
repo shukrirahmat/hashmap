@@ -154,8 +154,10 @@ const hashMap = function hashMap() {
   };
 };
 
+/*
 const map = hashMap();
 map.set("john", "doe");
 map.set("A", "almond");
 map.set("Q", "queen");
 console.log(map.entries());
+*/
